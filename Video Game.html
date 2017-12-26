@@ -1,0 +1,49 @@
+<html>
+    <title>Game</title>
+    <body>
+        <canvas id="canvas" height="500" width="999"></canvas>
+        <script>
+            var stage = document.getElementById("canvas").getContext("2d");
+            var playerX = 200;
+            var playerY = 50;
+            var xv = 15;
+            var yv = 15;
+            stage.fillStyle='red';
+            document.addEventListener('keydown', function(event){
+                                var key = event.keyCode;
+                if(key == 37){
+                    playerX=playerX-50
+                }
+                if(key == 39){
+                    playerX=playerX+50
+                }
+                if(key == 32){
+                    yv=-yv
+                }
+            });
+            function GameUpdate(){
+                stage.fillStyle='red';
+                stage.clearRect(0,0,999,500);
+                stage.fillRect(playerX,playerY,35,35);
+                stage.fillStyle='green';
+                stage.fillRect(0,450,999,100);
+                stage.fillRect(50,300,200,50);
+                stage.fillRect(650,300,200,50);
+                playerY=playerY+yv
+                if(playerY>425){
+                    playerY=playerY-yv
+                }
+                if(playerX > 50 && playerX < 250 && playerY > 270 && playerY < 270+50 || playerX > 600 && playerX < 650+300 && playerY > 270){
+                    playerY=playerY-yv
+                }
+                if(playerX > 650 && playerX < 650+850 && playerY < 300+50){
+                    yv=15
+                }
+                if(playerY < 100){
+                    yv=15
+                }
+            }
+            setInterval(GameUpdate, 50);
+        </script>
+    </body>
+</html>
